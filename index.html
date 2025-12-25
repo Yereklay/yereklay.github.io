@@ -1,15 +1,86 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yereklay's very cool website</title>
     <link rel="stylesheet" href="style.css">
-    <title>Yereklay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-    <h5>test123</h5>
-    <h4>test123</h4>
-    <h3>test123</h3>
-    <h2>test123</h2>
-    <h1>test123</h1>
+    <div class="container">
+        <header class="profile">
+            <h1>yereklay</h1>
+            <p>swift developer</p>
+        </header>
+
+        <main class="social-icons">
+            <a href="https://t.me/yereklay"
+                target="_blank"
+                class="icon-link"
+                aria-label="Telegram"
+                data-tooltip="Contact me via Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+
+            <a href="https://github.com/yereklay"
+                target="_blank"
+                class="icon-link"
+                aria-label="GitHub"
+                data-tooltip="Check my GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <a href="mailto:yereklay@gmail.com"
+                target="_blank"
+                class="icon-link"
+                aria-label="Email"
+                data-tooltip="Contact me via email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </main>
+        <footer>
+            <p>copyleft 2025 yereklay</p>
+        </footer>
+    </div>
 </body>
+
+<script>
+  const body = document.body;
+  const container = document.querySelector('.container');
+
+  let targetBgX = 50, targetBgY = 50;
+  let currentBgX = 50, currentBgY = 50;
+
+  let targetMenuX = 0, targetMenuY = 0;
+  let currentMenuX = 0, currentMenuY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    const x = e.clientX / window.innerWidth - 0.5;
+    const y = e.clientY / window.innerHeight - 0.5;
+    targetBgX = 50 + x * 40;
+    targetBgY = 50 + y * 40;
+    targetMenuX = x * 30;
+    targetMenuY = y * 30;
+  });
+
+  function animate() {
+    currentBgX += (targetBgX - currentBgX) * 0.06;
+    currentBgY += (targetBgY - currentBgY) * 0.06;
+
+    currentMenuX += (targetMenuX - currentMenuX) * 0.12;
+    currentMenuY += (targetMenuY - currentMenuY) * 0.12;
+
+    body.style.backgroundPosition = `${currentBgX}% ${currentBgY}%`;
+
+    container.style.transform = `
+      translate3d(${currentMenuX}px, ${currentMenuY}px, 0)
+      rotateX(${ -currentMenuY * 0.15 }deg)
+      rotateY(${ currentMenuX * 0.15 }deg)
+    `;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 </html>
